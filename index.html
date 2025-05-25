@@ -1,225 +1,544 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Engineering Alumni Association</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ΣΠΜΕΤ – Αίτημα Μητρώου</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <!-- Google Font -->
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #004d61; /* Σκούρο Τυρκουάζ */
+        --accent-color: #88395b; /* Ζωηρό Κεχριμπαρένιο */
+        --highlight-color: #2ec4b6; /* Φωτεινό Τυρκουάζ */
+        --bg-light: #f0f4f8; /* Απαλό Γαλάζιο */
+        --text-dark: #102a43; /* Πολύ Σκούρο Μπλε */
+        --section-padding: 60px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        color: var(--text-dark);
+        background: var(--bg-light);
+        scroll-behavior: smooth;
+      }
+      .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      header {
+        position: fixed;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo img {
+        height: 60px;
+        width: auto;
+      }
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      nav a:hover {
+        color: var(--primary-color);
+      }
+
+      /* Hero */
+      .hero {
+        height: 70vh;
+        background: var(--accent-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+      }
+      .hero-content {
+        background: #fff;
+        padding: 10px 10px;
+        border-radius: 10px;
+        max-width: 600px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .hero-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      .hero-content h3 {
+        font-size: 1.75rem;
+        margin-bottom: 15px;
+        color: var(--text-dark);
+        font-weight: 700;
+      }
+      .hero-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-dark);
+      }
+
+      /* Sections */
+      section {
+        padding: var(--section-padding) 0;
+      }
+      #about,
+      #benefits {
+        background: #fff;
+      }
+      #request,
+      #legal,
+      #faq,
+      #attachments,
+      #contact {
+        background: #f9f9f9;
+      }
+      section h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .card ul {
+        list-style: disc inside;
+        margin-top: 10px;
+      }
+
+      /* FAQ */
+      .faq-item {
+        margin-bottom: 15px;
+      }
+      .faq-question {
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+        background: #e3e3e3;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: left;
+      }
+      .faq-answer {
+        display: none;
+        padding: 15px;
+        background: #fff;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      /* Attachments */
+      #attachments-list {
+        list-style: none;
+        margin-top: 15px;
+        display: none;
+      }
+      #attachments-list li + li {
+        margin-top: 8px;
+      }
+      #attachments-list a {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      /* Modern Contact Form */
+      .contact-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .contact-form .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .contact-form label {
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+      .contact-form textarea {
+        resize: vertical;
+      }
+      .contact-form button {
+        grid-column: span 2;
+        padding: 15px 0;
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .contact-form button:hover {
+        background: #005590;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--primary-color);
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
+      footer a {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-content h2 {
+          font-size: 2rem;
+        }
+        nav ul {
+          gap: 10px;
+        }
+        .contact-form {
+          grid-template-columns: 1fr;
+        }
+        .contact-form button {
+          grid-column: span 1;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
-      <nav class="navbar">
+      <div class="container nav-container">
         <div class="logo">
-          <h1>Engineering Alumni Association</h1>
+          <img src="logo.png" alt="ΣΠΜΕΤ Logo" />
+          <span class="logo-text">
+            Σύλλογος Πτυχιουχων Μηχανολογων Ενεργειακής Τεχνολογίας Τ.Ε.Ι</span
+          >
         </div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#goals">Goals</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#resources">Resources</a></li>
-          <li><a href="#contact" class="cta-button">Contact Us</a></li>
-        </ul>
-      </nav>
+        <nav>
+          <ul>
+            <li><a href="#about">Σχετικά</a></li>
+            <li><a href="#request">Αίτημα</a></li>
+            <li><a href="#legal">Πλαίσιο</a></li>
+            <li><a href="#benefits">Οφέλη</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h3>ΑΙΤΗΜΑ ΓΙΑ ΤΗ ΣΥΣΤΑΣΗ ΜΗΤΡΩΟΥ</h3>
+        <p>
+          Καλούμε άμεσα τα αρμόδια Υπουργεία και τη Διοίκηση του Πρυτανικού
+          Συμβουλίου να προχωρήσουν στη θεσμοθέτηση του προβλεπόμενου Μητρώου
+          Αποφοίτων του Τμήματος Ενεργειακής Τεχνολογίας Τ.Ε.Ι. Αθήνας. Με την
+          υλοποίηση αυτής της διοικητικής πράξης διασφαλίζεται η ίση
+          επαγγελματική αναγνώριση και η πλήρης άσκηση των δικαιωμάτων των
+          πτυχιούχων μας, σύμφωνα με τα Προεδρικά Διατάγματα 87/1996 και 55/2000
+          και τις σχετικές υπουργικές αποφάσεις.
+        </p>
+      </div>
+    </section>
+
     <main>
-      <section id="hero">
-        <div class="hero-content">
-          <h1>Uniting Engineers for a Stronger Future</h1>
-          <p>
-            Advocating for engineering alumni rights and fostering professional
-            growth
+      <!-- About -->
+      <section id="about">
+        <div class="container">
+          <h3>Σχετικά με τον Σύλλογο</h3>
+          <p style="max-width: 800px; margin: auto; text-align: center">
+            Ο Σύλλογος Αποφοίτων του Τμήματος Ενεργειακής Τεχνολογίας Τ.Ε.Ι.
+            Αθήνας (ΣΠΜΕΤ) συγκροτήθηκε με σκοπό την ενίσχυση της συλλογικής
+            φωνής και την προάσπιση των δικαιωμάτων των αποφοίτων μας. Από την
+            ίδρυσή του συμμετέχει ενεργά σε διαβουλεύσεις με εκπροσώπους του
+            Υπουργείου Ανάπτυξης και Παιδείας, επιδιώκοντας την αναγνώριση της
+            εξειδίκευσής μας στην Ενεργειακή Μηχανολογία. Το Τμήμα λειτούργησε
+            στο πλαίσιο των Σχολών Τεχνολογικών Εφαρμογών, παρέχοντας
+            ολοκληρωμένη κατάρτιση σε νέες τεχνολογίες και πρακτικές εφαρμογές.
+            Παρά το υψηλό επιστημονικό και τεχνικό υπόβαθρο που αποκτήσαμε,
+            στερούμαστε μέχρι σήμερα θεσμοθετημένου μητρώου, με αποτέλεσμα να
+            μην μπορούμε να ασκήσουμε πλήρως τα επαγγελματικά μας δικαιώματα και
+            να συμμετέχουμε ισότιμα στην αγορά εργασίας.
           </p>
-          <a href="#join" class="cta-button">Join Our Cause</a>
         </div>
       </section>
 
-      <section id="about" class="section">
+      <!-- Request -->
+      <section id="request">
         <div class="container">
-          <h2>About Our Association</h2>
-          <div class="about-content">
-            <p>
-              The Engineering Alumni Association is a dedicated organization
-              representing the interests and rights of engineering graduates. We
-              work tirelessly to ensure that our members receive the
-              recognition, opportunities, and support they deserve in their
-              professional careers.
-            </p>
-            <div class="stats">
-              <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <h3>1000+</h3>
-                <p>Members</p>
-              </div>
-              <div class="stat-item">
-                <i class="fas fa-graduation-cap"></i>
-                <h3>50+</h3>
-                <p>Years of History</p>
-              </div>
-              <div class="stat-item">
-                <i class="fas fa-handshake"></i>
-                <h3>100+</h3>
-                <p>Partners</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="goals" class="section">
-        <div class="container">
-          <h2>Our Goals</h2>
-          <div class="goals-grid">
-            <div class="goal-card">
-              <i class="fas fa-balance-scale"></i>
-              <h3>Advocacy</h3>
+          <h3>Το Αίτημα</h3>
+          <div class="cards">
+            <div class="card">
+              <h4>Σύσταση νέου Μητρώου</h4>
               <p>
-                Fighting for fair recognition and compensation for engineering
-                professionals
+                Ενσωμάτωση των αποφάσεων Π.Δ. 87/1996 & 55/2000 για καταγραφή
+                των αποφοίτων στο επίσημο μητρώο.
               </p>
             </div>
-            <div class="goal-card">
-              <i class="fas fa-network-wired"></i>
-              <h3>Networking</h3>
-              <p>Building strong professional connections among alumni</p>
+            <div class="card">
+              <h4>Θεσμική Εφαρμογή</h4>
+              <p>
+                Εκτέλεση Υπ. Αποφάσεων ΦΓ/7.6/12001/733 (30/09/2009) &
+                ΦΓ7.6/48/197 (07/02/2012) που προβλέπουν το μητρώο.
+              </p>
             </div>
-            <div class="goal-card">
-              <i class="fas fa-book-reader"></i>
-              <h3>Education</h3>
-              <p>Promoting continuous learning and professional development</p>
-            </div>
-            <div class="goal-card">
-              <i class="fas fa-hands-helping"></i>
-              <h3>Support</h3>
-              <p>Providing resources and assistance to members</p>
+            <div class="card">
+              <h4>Αποκατάσταση Δικαιωμάτων</h4>
+              <p>
+                Έκδοση βεβαίωσης εγγραφής στο Βιβλίο Πτυχιούχων & Άδειας Άσκησης
+                Επαγγέλματος.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="news" class="section">
+      <!-- Legal Framework -->
+      <section id="legal">
         <div class="container">
-          <h2>Latest News</h2>
-          <div class="news-grid">
-            <article class="news-card">
-              <div class="news-date">March 15, 2024</div>
-              <h3>New Advocacy Campaign Launched</h3>
+          <h3>Ιστορικό & Νομικό Πλαίσιο</h3>
+          <div class="cards">
+            <div class="card">
+              <h4>Π.Δ. 87/1996 & 55/2000</h4>
               <p>
-                We're launching a new campaign to address engineering
-                compensation standards...
+                Προβλέπουν ρητά τη σύσταση νέου μητρώου για τους αποφοίτους του
+                Τμήματος Ενεργειακής Τεχνολογίας.
               </p>
-              <a href="#" class="read-more">Read More</a>
-            </article>
-            <article class="news-card">
-              <div class="news-date">March 10, 2024</div>
-              <h3>Annual Conference Announced</h3>
-              <p>
-                Join us for our annual conference featuring industry leaders and
-                networking opportunities...
-              </p>
-              <a href="#" class="read-more">Read More</a>
-            </article>
-            <article class="news-card">
-              <div class="news-date">March 5, 2024</div>
-              <h3>New Partnership Agreement</h3>
-              <p>
-                We've signed a new partnership with leading tech companies to
-                create more opportunities...
-              </p>
-              <a href="#" class="read-more">Read More</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="resources" class="section">
-        <div class="container">
-          <h2>Resources</h2>
-          <div class="resources-grid">
-            <div class="resource-card">
-              <i class="fas fa-file-pdf"></i>
-              <h3>Career Guides</h3>
-              <p>Access our comprehensive career development resources</p>
-              <a href="#" class="resource-link">View Resources</a>
             </div>
-            <div class="resource-card">
-              <i class="fas fa-video"></i>
-              <h3>Webinars</h3>
-              <p>Watch recorded sessions from industry experts</p>
-              <a href="#" class="resource-link">Watch Now</a>
+            <div class="card">
+              <h4>30/09/2009</h4>
+              <p>
+                Υπ. Απόφαση ΦΓ/7.6/12001/733: Αποκλεισμός εγγραφής σε υπάρχοντα
+                μητρώα Μηχανολόγων Τ.Ε.
+              </p>
             </div>
-            <div class="resource-card">
-              <i class="fas fa-tools"></i>
-              <h3>Tools & Templates</h3>
-              <p>Download useful templates and tools for your career</p>
-              <a href="#" class="resource-link">Download</a>
+            <div class="card">
+              <h4>07/02/2012</h4>
+              <p>
+                Υπ. Απόφαση ΦΓ7.6/48/197: Επαναβεβαίωση ανάγκης νέου μητρώου
+                χωρίς υλοποίηση.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="section">
+      <!-- Benefits -->
+      <section id="benefits">
         <div class="container">
-          <h2>Contact Us</h2>
-          <div class="contact-content">
-            <form class="contact-form">
-              <div class="form-group">
-                <input type="text" placeholder="Your Name" required />
-              </div>
-              <div class="form-group">
-                <input type="email" placeholder="Your Email" required />
-              </div>
-              <div class="form-group">
-                <textarea placeholder="Your Message" required></textarea>
-              </div>
-              <button type="submit" class="cta-button">Send Message</button>
-            </form>
+          <h3>Οφέλη</h3>
+          <div class="cards">
+            <div class="card">
+              <h4>Ίση Μεταχείριση</h4>
+              <p>
+                Διασφάλιση αρχής ίσης μεταχείρισης σε σχέση με πτυχιούχους άλλων
+                Τμημάτων Μηχανολογίας.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Αγορά Εργασίας</h4>
+              <p>
+                Πρόσβαση σε δημόσιες προκηρύξεις και πλήρη επαγγελματικά
+                δικαιώματα.
+              </p>
+            </div>
+            <div class="card">
+              <h4>Νομική Κάλυψη</h4>
+              <p>
+                Έγκυρες βεβαιώσεις που γίνονται δεκτές σε διαγωνισμούς του
+                Δημοσίου.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="container">
+          <h3>Συχνές Ερωτήσεις (FAQ)</h3>
+          <div class="faq-item">
+            <button class="faq-question">
+              Τι προβλέπουν τα Προεδρικά Διατάγματα;
+            </button>
+            <div class="faq-answer">
+              <p>
+                Τα Π.Δ. 87/1996 & 55/2000 προβλέπουν τη δημιουργία νέου μητρώου
+                αποφοίτων Ενεργειακής Τεχνολογίας.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Γιατί χρειάζεται το νέο μητρώο;
+            </button>
+            <div class="faq-answer">
+              <p>
+                Οι υπάρχουσες βεβαιώσεις δεν γίνονται δεκτές σε διαγωνισμούς
+                βάσει Π.Δ. 85/2022.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Ποια έγγραφα χρειάζονται;</button>
+            <div class="faq-answer">
+              <p>
+                Βεβαίωση εγγραφής στο επίσημο μητρώο & άδεια άσκησης
+                επαγγέλματος.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="container">
+          <h3>Επικοινωνία με τον Σύλλογο</h3>
+          <form action="#" method="post" class="contact-form">
+            <div class="form-group">
+              <label for="name">Όνομα</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Το όνομά σας"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@domain.com"
+                required
+              />
+            </div>
+            <div class="form-group" style="grid-column: span 2">
+              <label for="message">Μήνυμα</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Το μήνυμά σας"
+                required
+              ></textarea>
+            </div>
+            <button type="submit">Αποστολή</button>
+          </form>
         </div>
       </section>
     </main>
-
     <footer>
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3>Engineering Alumni Association</h3>
-            <p>Advocating for engineering professionals worldwide</p>
-          </div>
-          <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#goals">Goals</a></li>
-              <li><a href="#news">News</a></li>
-              <li><a href="#resources">Resources</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h3>Connect With Us</h3>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-facebook"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>
-            &copy; 2024 Engineering Alumni Association. All rights reserved.
-          </p>
-        </div>
+        <p>
+          © 2025 ΣΠΜΕΤ · <a href="mailto:info@spmet.gr">info@spmet.gr</a> · Τηλ.
+          210 1234567 ·
+          <a
+            href="https://twitter.com/spmet"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fa-brands fa-x-twitter"></i> @spmet
+          </a>
+        </p>
       </div>
     </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const faqQuestions = document.querySelectorAll(".faq-question");
 
-    <script src="script.js"></script>
+        faqQuestions.forEach((question) => {
+          question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+            const isOpen = answer.style.display === "block";
+
+            // Close all other answers
+            document.querySelectorAll(".faq-answer").forEach((item) => {
+              item.style.display = "none";
+            });
+
+            // Toggle current answer
+            answer.style.display = isOpen ? "none" : "block";
+
+            // Update button text
+            question.textContent = isOpen
+              ? question.textContent.replace("−", "+")
+              : question.textContent.replace("+", "−");
+          });
+        });
+      });
+    </script>
   </body>
 </html>
