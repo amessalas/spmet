@@ -29,6 +29,9 @@
             Τ.Ε.Ι</span
           >
         </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
         <nav>
           <ul>
             <li><a href="#about">Σχετικά</a></li>
@@ -282,6 +285,7 @@
     </footer>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // FAQ functionality
         const faqQuestions = document.querySelectorAll(".faq-question");
 
         faqQuestions.forEach((question) => {
@@ -302,6 +306,35 @@
               ? question.textContent.replace("−", "+")
               : question.textContent.replace("+", "−");
           });
+        });
+
+        // Mobile menu functionality
+        const menuToggle = document.querySelector(".menu-toggle");
+        const nav = document.querySelector("nav");
+        const navLinks = document.querySelectorAll("nav a");
+
+        menuToggle.addEventListener("click", () => {
+          nav.classList.toggle("active");
+          menuToggle.querySelector("i").classList.toggle("fa-bars");
+          menuToggle.querySelector("i").classList.toggle("fa-times");
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("active");
+            menuToggle.querySelector("i").classList.add("fa-bars");
+            menuToggle.querySelector("i").classList.remove("fa-times");
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+          if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+            nav.classList.remove("active");
+            menuToggle.querySelector("i").classList.add("fa-bars");
+            menuToggle.querySelector("i").classList.remove("fa-times");
+          }
         });
       });
     </script>
