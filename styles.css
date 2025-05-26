@@ -31,11 +31,30 @@ body {
 .site-header nav ul {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 20px;
+  align-items: center;
 }
 .site-header nav a {
-  color: #fff;
   text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.site-header nav a:hover {
+  color: var(--primary-color);
+}
+.site-header nav .social-link {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+.site-header nav .social-link:hover {
+  color: var(--primary-color);
+}
+.site-header nav .social-link i {
+  font-size: 1.3rem;
 }
 
 /* Hero */
@@ -212,7 +231,7 @@ footer a:hover {
 }
 
 .social-link i {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 /* Utility */
@@ -229,6 +248,24 @@ footer a:hover {
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 30px 20px;
+  }
+
+  .hero-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .site-header nav ul {
+    gap: 10px;
+  }
+
+  .site-header nav .social-link {
+    font-size: 0.9rem;
   }
 }
 
@@ -335,15 +372,5 @@ footer a:hover {
 
   .contact-form {
     order: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-content {
-    padding: 30px 20px;
-  }
-
-  .hero-content h3 {
-    font-size: 1.5rem;
   }
 }
