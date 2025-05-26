@@ -65,6 +65,32 @@ header {
   line-height: 1.2;
 }
 
+/* Menu Toggle Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 5px;
+  z-index: 101;
+}
+
+.menu-toggle i {
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.active i {
+  transform: rotate(90deg);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -263,6 +289,7 @@ section h3 {
   gap: 20px;
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .contact-form .form-group {
@@ -273,25 +300,30 @@ section h3 {
 .contact-form label {
   margin-bottom: 8px;
   font-weight: 500;
+  color: var(--text-dark);
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px;
+  padding: 12px 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
+  background: #fff;
+  width: 100%;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 77, 97, 0.1);
 }
 
 .contact-form textarea {
   resize: vertical;
+  min-height: 120px;
 }
 
 .contact-form button {
@@ -304,11 +336,18 @@ section h3 {
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  margin-top: 10px;
 }
 
 .contact-form button:hover {
   background: #005590;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form button:active {
+  transform: translateY(0);
 }
 
 /* Footer */
@@ -362,20 +401,28 @@ footer a:hover {
     font-size: 1rem;
   }
 
+  .menu-toggle {
+    display: block;
+  }
+
   nav {
     position: fixed;
-    top: 70px; /* Height of header */
+    top: 70px;
     left: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.98);
-    padding: 10px 0;
+    padding: 0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transform: translateY(-100%);
     transition: transform 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
   }
 
   nav.active {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 
   nav ul {
@@ -392,6 +439,11 @@ footer a:hover {
   nav a {
     padding: 12px 20px;
     justify-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  nav li:last-child a {
+    border-bottom: none;
   }
 
   .hero {
@@ -411,10 +463,33 @@ footer a:hover {
 
   .contact-form {
     grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 15px;
   }
 
   .contact-form button {
-    grid-column: span 1;
+    grid-column: 1;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 10px 12px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .contact-form textarea {
+    min-height: 100px;
+  }
+
+  #contact {
+    padding: 40px 0;
+  }
+
+  #contact h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
   }
 }
 
@@ -428,26 +503,20 @@ footer a:hover {
   .logo-text {
     font-size: 0.9rem;
   }
+}
 
-  .menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    padding: 5px;
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 0 10px;
   }
-}
 
-/* Add menu toggle button styles */
-.menu-toggle {
-  display: none;
-}
+  .contact-form label {
+    font-size: 0.95rem;
+  }
 
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
+  .contact-form input,
+  .contact-form textarea {
+    padding: 8px 10px;
   }
 }
 
