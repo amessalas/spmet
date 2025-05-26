@@ -380,3 +380,52 @@ footer a:hover {
     margin-top: 0.5rem;
   }
 }
+
+/* About Section */
+.about-content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 40px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  text-align: justify;
+}
+
+.about-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-logo img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.about-logo img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-logo {
+    order: -1;
+  }
+
+  .about-logo img {
+    max-width: 200px;
+  }
+}
