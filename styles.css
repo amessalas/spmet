@@ -187,14 +187,38 @@ section {
 }
 
 #about,
-#benefits {
+#legal {
   background: #fff;
 }
 
-#request,
-#legal,
-#faq,
-#contact {
+#request {
+  background: linear-gradient(135deg, #f9f9f9 0%, #f0f4f8 100%);
+  position: relative;
+}
+
+#request::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(0,77,97,0.03)"/></svg>');
+  opacity: 0.5;
+}
+
+#legal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(136,57,91,0.03)"/></svg>');
+  opacity: 0.5;
+}
+
+#faq {
   background: #f9f9f9;
 }
 
@@ -203,6 +227,8 @@ section h3 {
   margin-bottom: 25px;
   color: var(--primary-color);
   font-size: 1.8rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Cards */
@@ -210,6 +236,8 @@ section h3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -218,10 +246,20 @@ section h3 {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#request .card {
+  border-left: 4px solid var(--primary-color);
+}
+
+#legal .card {
+  border-left: 4px solid var(--accent-color);
 }
 
 .card ul {
